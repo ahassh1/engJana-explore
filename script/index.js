@@ -32,15 +32,28 @@ const displayLevelWord = (words) => {
   // get the container
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
+
+  if (words.length === 0) {
+    wordContainer.innerHTML = `
+      <div class="bg-gray-100 text-center col-span-full">
+      <img class="mx-auto" src="./assets/alert-error.png" alt="" />
+        <p class="text-gray-500 mb-1">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+        <h1 class="text-gray-900 font-semibold text-3xl">
+          নেক্সট Lesson এ যান
+        </h1>
+      </div>
+    `;
+    return;
+  }
   //  get into every lessons
   words.forEach((word) => {
     // create element (createElement)
     const card = document.createElement("div");
     card.innerHTML = `
     <div class="bg-white rounded-md shadow-lg p-7 md:p-10 lg:p-13  text-center space-y-1.5 flex-1">
-        <h1 class="font-bold text-[17px] md:text-2xl text-gray-900">${word.word}</h1>
+        <h1 class="font-bold text-[17px] md:text-2xl text-gray-900">${word.word ? word.word : "শব্দ পাওয়া যায়নি"}</h1>
         <h5 class="font-semibold text-gray-700">Meaning /Pronounciation</h5>
-        <h1 class="font-bold text-[16px] md:text-[20px] text-gray-800">"${word.meaning}/ ${word.pronunciation}"</h1>
+        <h1 class="font-bold text-[16px] md:text-[20px] text-gray-800">"${word.meaning ? word.meaning : "দুঃখিত, কোনো ফলাফল পাওয়া যায়নি"}/ ${word.pronunciation ? word.pronunciation : "অনুসন্ধানকৃত Pronunciation পাওয়া যায়নি"}"</h1>
         <div class="flex justify-between items-center">
           <button class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
             <i class="fa-solid fa-circle-info"></i>

@@ -14,9 +14,32 @@ const displayLessons = (lessons) => {
     //3. create element (createElement)
     const btnDiv = document.createElement("div");
     btnDiv.innerHTML = `
-      <button class="btn btn-outline btn-primary"><i class="fa-solid fa-book"></i>Lesson- ${lesson.level_no}</button>
+      <button onClick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book"></i>Lesson- ${lesson.level_no}</button>
     `;
     //4. append into container (appendChild)
     levelContainer.appendChild(btnDiv);
   }
+};
+
+const loadLevelWord = (id) => {
+  const url = `https://openapi.programming-hero.com/api/level/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayLevelWord(data.data));
+};
+
+const displayLevelWord = (words) => {
+  // get the container
+  const wordContainer = document.getElementById("word-container");
+  wordContainer.innerHTML = "";
+  //  get into every lessons
+  words.forEach((word) => {
+    // create element (createElement)
+    const card = document.createElement("div");
+    card.innerHTML = `
+    <p>card is done</p>
+    `;
+    // append into container (appendChild)
+    wordContainer.appendChild(card);
+  });
 };

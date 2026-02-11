@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>English Janala</title>
-    <script src="style/style.css"></script>
+
+    <!-- custom css   -->
+    <link rel="stylesheet" href="style/style.css" />
 
     <!-- font awesome cdn  -->
     <link
@@ -55,11 +57,25 @@
             </div>
             <ul
               tabindex="-1"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-2"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow space-y-2"
             >
-              <a class="btn btn-outline btn-primary">FAQ</a>
-              <a class="btn btn-outline btn-primary">Learn</a>
-              <a class="btn btn-outline btn-primary">Logout</a>
+              <li>
+                <a class="btn btn-outline btn-primary w-full">
+                  <i class="fa-solid fa-book"></i> FAQ
+                </a>
+              </li>
+
+              <li>
+                <a class="btn btn-outline btn-primary w-full">
+                  <i class="fa-solid fa-book mr-2"></i> Learn
+                </a>
+              </li>
+
+              <li>
+                <a class="btn btn-outline btn-primary w-full">
+                  <i class="fa-solid fa-book mr-2"></i> Logout
+                </a>
+              </li>
             </ul>
           </div>
           <a class="btn btn-ghost text-xl"
@@ -86,7 +102,7 @@
         >
           Welcome to <span class="text-blue-500">English Janala</span>
         </h1>
-        <p class="text-[15px] lg:w-3/5 text-gray-600">
+        <p class="text-[13px] md:text-[15px] lg:w-3/5 text-gray-600">
           আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা
           আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে
           অন্য একটি Level এ
@@ -103,16 +119,34 @@
             placeholder="Password"
           />
         </div>
-        <button
-          class="btn bg-blue-600 shadow-md hover:bg-white hover:text-black hover:border-blue-600 text-white rounded-md mt-4"
-        >
-          Get Started
-        </button>
+        <div class="text-center md:text-left">
+          <button
+            class="btn bg-blue-600 shadow-md hover:bg-white hover:text-black hover:border-blue-600 text-white rounded-md mt-4"
+          >
+            Get Started
+          </button>
+        </div>
       </div>
       <div class="items-center">
         <img src="assets/hero-student.png" alt="" />
       </div>
     </section>
+
+    <!-- learn vocaculary section start  -->
+    <section class="w-11/12 mx-auto">
+      <div>
+        <h1
+          class="text-3xl md:text-4xl font-bold text-center mb-4 mt-6 md:mt-10"
+        >
+          <span class="text-blue-600">Let's </span>Learn Vocabularies
+        </h1>
+      </div>
+      <div
+        class="flex justify-center flex-wrap gap-3"
+        id="level-container"
+      ></div>
+    </section>
+
     <script src="script/index.js"></script>
   </body>
 </html>

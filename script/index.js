@@ -67,7 +67,7 @@ const displayLevelWord = (words) => {
         <h5 class="font-semibold text-gray-700">Meaning /Pronounciation</h5>
         <h1 class="font-bold text-[16px] md:text-[20px] text-gray-800">"${word.meaning ? word.meaning : "দুঃখিত, কোনো ফলাফল পাওয়া যায়নি"}/ ${word.pronunciation ? word.pronunciation : "অনুসন্ধানকৃত Pronunciation পাওয়া যায়নি"}"</h1>
         <div class="flex justify-between items-center">
-          <button onclick="my_modal_5.showModal()" class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
+          <button onclick="loadWordDetail(${word.id})" class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
             <i class="fa-solid fa-circle-info"></i>
           </button>
           <button class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
@@ -79,6 +79,46 @@ const displayLevelWord = (words) => {
     // append into container (appendChild)
     wordContainer.appendChild(card);
   });
+};
+
+const loadWordDetail = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const res = await fetch(url);
+  const details = await res.json();
+  displayWordDetails(details.data);
+};
+const displayWordDetails = (word) => {
+  console.log(word);
+  const detailsBox = document.getElementById("details-container");
+  // detailsBox.innerHTML = "this is box";
+  detailsBox.innerHTML = `
+  <div>
+           <h1>Eager (<i class="fa-solid fa-microphone"></i>: ইগার)</h1>
+         </div>
+          <div>
+            <h5>meaning</h5>
+          <h6>আগ্রহী</h6>
+          </div>
+          <div>
+            <h5>Example</h5>
+            <p>He is eager to learn new skills.</p>
+          </div>
+          <div>
+            <h5>সমার্থক শব্দ গুলো</h5>
+            <div>
+              <span class="badge badge-outline">Enthusiastic</span>
+              <span class="badge badge-outline">Keen</span>
+              <span class="badge badge-outline">Excited</span>
+            </div>
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn custom-btn custom-btn:hover">Complete Learning</button>
+            </form>
+          </div>
+        </div>`;
+  document.getElementById("word_modal").showModal();
 };
 
 const removeActive = () => {

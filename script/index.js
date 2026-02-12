@@ -81,6 +81,17 @@ const displayLevelWord = (words) => {
   });
 };
 
+// {
+//     "word": "Abundant",
+//     "meaning": null,
+//     "pronunciation": "অবানডান্ট",
+//     "level": 3,
+//     "sentence": "Water is abundant in rainy seasons.",
+//     "points": 3,
+//     "synonyms": [],
+//     "id": 1
+// }
+
 const loadWordDetail = async (id) => {
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
   const res = await fetch(url);
@@ -93,22 +104,22 @@ const displayWordDetails = (word) => {
   // detailsBox.innerHTML = "this is box";
   detailsBox.innerHTML = `
   <div>
-           <h1>Eager (<i class="fa-solid fa-microphone"></i>: ইগার)</h1>
+           <h1 class="text-xl md:text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone"></i>: ${word.pronunciation})</h1>
          </div>
           <div>
-            <h5>meaning</h5>
-          <h6>আগ্রহী</h6>
+            <h5 class="font-semibold">meaning</h5>
+          <h6>${word.meaning ? word.meaning : "দুঃখিত, কোনো ফলাফল পাওয়া যায়নি"}</h6>
           </div>
           <div>
-            <h5>Example</h5>
-            <p>He is eager to learn new skills.</p>
+            <h5 class="font-semibold">Example</h5>
+            <p>${
+              word.sentence ? word.sentence : "দুঃখিত, কোনো ফলাফল পাওয়া যায়নি"
+            }</p>
           </div>
           <div>
-            <h5>সমার্থক শব্দ গুলো</h5>
+            <h5 class="font-semibold">সমার্থক শব্দ গুলো</h5>
             <div>
-              <span class="badge badge-outline">Enthusiastic</span>
-              <span class="badge badge-outline">Keen</span>
-              <span class="badge badge-outline">Excited</span>
+                ${createElement(word.synonyms)}
             </div>
           </div>
           <div class="modal-action">
@@ -124,4 +135,9 @@ const displayWordDetails = (word) => {
 const removeActive = () => {
   const lessonButtons = document.querySelectorAll(".lesson-btn");
   lessonButtons.forEach((btn) => btn.classList.remove("active"));
+};
+
+const createElement = (arr) => {
+  const htmlElemens = arr.map((el) => `<span class="btn">${el}</span>`);
+  return htmlElemens.join(" ");
 };

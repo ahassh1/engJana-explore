@@ -14,18 +14,30 @@ const displayLessons = (lessons) => {
     //3. create element (createElement)
     const btnDiv = document.createElement("div");
     btnDiv.innerHTML = `
-    <button onClick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book"></i>Lesson- ${lesson.level_no}</button>
+    <button id="lesson-btn-${lesson.level_no}" onClick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn"><i class="fa-solid fa-book"></i>Lesson- ${lesson.level_no}</button>
     `;
     //4. append into container (appendChild)
     levelContainer.appendChild(btnDiv);
   }
 };
 
+// fetch function
+// then another function
+// and get the container (getElementById)
+// get into very element (loop)
+// create element (createElement)
+// append into container (appendChild)
+
 const loadLevelWord = (id) => {
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayLevelWord(data.data));
+    .then((data) => {
+      removeActive();
+      const clickBtn = document.getElementById(`lesson-btn-${id}`);
+      clickBtn.classList.add("active");
+      displayLevelWord(data.data);
+    });
 };
 
 const displayLevelWord = (words) => {
@@ -67,4 +79,9 @@ const displayLevelWord = (words) => {
     // append into container (appendChild)
     wordContainer.appendChild(card);
   });
+};
+
+const removeActive = () => {
+  const lessonButtons = document.querySelectorAll(".lesson-btn");
+  lessonButtons.forEach((btn) => btn.classList.remove("active"));
 };

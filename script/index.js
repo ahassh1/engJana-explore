@@ -72,7 +72,7 @@ const displayLevelWord = (words) => {
           <button onclick="loadWordDetail(${word.id})" class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
             <i class="fa-solid fa-circle-info"></i>
           </button>
-          <button class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
+          <button onClick="pronounceWord('${word.word}')" class="btn bg-[1A91FF10] hover:bg-[1A91FF90]">
             <i class="fa-solid fa-volume-high"></i>
           </button>
         </div>
@@ -83,17 +83,6 @@ const displayLevelWord = (words) => {
   });
   manageSpinner(false);
 };
-
-// {
-//     "word": "Abundant",
-//     "meaning": null,
-//     "pronunciation": "অবানডান্ট",
-//     "level": 3,
-//     "sentence": "Water is abundant in rainy seasons.",
-//     "points": 3,
-//     "synonyms": [],
-//     "id": 1
-// }
 
 const loadWordDetail = async (id) => {
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
@@ -154,3 +143,26 @@ const manageSpinner = (status) => {
     document.getElementById("word-container").classList.remove("hidden");
   }
 };
+document.getElementById("btn-search").addEventListener("click", () => {
+  removeActive();
+  const input = document.getElementById("input-search");
+  const searchValue = input.value.trim().toLowerCase();
+  console.log(searchValue);
+
+  fetch("https://openapi.programming-hero.com/api/words/all")
+    .then((res) => res.json())
+    .then((data) => {
+      const allwords = data.data;
+      console.log(allwords);
+      const filteredWords = allwords.filter((word) =>
+        word.word.toLowerCase().includes(searchValue),
+      );
+      displayLevelWord(filteredWords);
+    });
+});
+
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}

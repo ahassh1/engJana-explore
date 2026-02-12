@@ -149,6 +149,32 @@
       <span class="loading loading-bars loading-xl"></span>
     </section>
 
+        <!-- search section start  -->
+         <section class="text-center mt-4 md:mt-6">
+          <div class="join">
+  <div>
+    <label class="input validator join-item">
+      <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="2.5"
+          fill="none"
+          stroke="currentColor"
+        >
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </g>
+      </svg>
+      <input id="input-search" type="text" placeholder="search vocabulary" required />
+    </label>
+    
+  </div>
+  <button id="btn-search" class="btn custom-btn custom-btn:hover">Search
+  </button>
+</div>
+         </section>
+
     <!-- card start -->
     <section
       id="word-container"
@@ -163,9 +189,6 @@
     </section>
 
     <!-- modal section start   -->
-    <!-- Open the modal using ID.showModal() method -->
-
-    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
     <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <div id="details-container" class="space-y-2">
